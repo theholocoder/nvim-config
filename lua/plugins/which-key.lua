@@ -1,0 +1,11 @@
+--[[
+-- Useful plugin to show you pending keybinds.
+--]]
+vim.pack.add({ "https://github.com/folke/which-key.nvim" })
+
+require("which-key").setup({
+  delay = 0,
+  icons = {
+    mappings = true,
+  },
+})

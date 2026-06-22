@@ -1,0 +1,9 @@
+--[[
+-- Render markdown files in Neovim
+--]]
+vim.pack.add({
+  'https://github.com/nvim-treesitter/nvim-treesitter',
+  'https://github.com/nvim-mini/mini.nvim',   -- if you use the mini.nvim suite
+  --
+  "https://github.com/meanderingprogrammer/render-markdown.nvim"
+})

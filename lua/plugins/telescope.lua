@@ -2,17 +2,25 @@
 -- telescope.nvim is a highly extendable fuzzy finder over lists. Built on the latest awesome features from neovim core.
 -- Telescope is centered around modularity, allowing for easy customization.
 --]]
-local function build_telescope_fzf(ev)
-  local name, kind = ev.data.spec.name, ev.data.kind
-  -- Run build script after plugin's code has changed
-  if name == "telescope-fzf-native" and (kind == "install" or kind == "update") then
-    vim.system({ 'make' }, { cwd = ev.data.path })
+vim.api.nvim_create_autocmd('PackChanged', {
+  desc = "Build some plugins when installed or updated",
+  group = vim.api.nvim_create_augroup("kickstart-build-plugins", { clear = true }),
+  callback = function(ev)
+    local name, kind = ev.data.spec.name, ev.data.kind
+    -- Run build script after plugin's code has changed
+    if name:find("telescope-fzf-native", 0, true) ~= nil and (kind == "install" or kind == "update") then
+      local output = vim.system({ 'make' }, { cwd = ev.data.path, text = true }):wait()
+      if output.code ~= 0 then
+        vim.notify(output.stderr, vim.log.levels.ERROR, { title = "Build failed" })
+        return
+      end
+      print(name .. " has been built successfully")
+    end
   end
-end
-vim.api.nvim_create_autocmd('PackChanged', { callback = build_telescope_fzf })
+})
 vim.pack.add({
   "https://github.com/nvim-lua/plenary.nvim",
-  { src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim", name = "telescope-fzf-native" },
+  "https://github.com/nvim-telescope/telescope-fzf-native.nvim",
   "https://github.com/nvim-telescope/telescope-ui-select.nvim",
   "https://github.com/nvim-telescope/telescope-file-browser.nvim",
   --

@@ -7,8 +7,8 @@ require("conform").setup({
   formatters_by_ft = {
     -- These formatter still need to be installed. See :Mason
     lua = { "lua-format" }, -- keep default
-    javascript = { "biome", "prettier" },
-    typescript = { "biome", "prettier" },
+    javascript = { "biome" },
+    typescript = { "biome" },
     php = { "php" },
     json = { "prettier" },
     jsonc = { "prettier" },

@@ -22,6 +22,7 @@ require("plugins.flash")
 require("plugins.harpoon")
 require("plugins.terminal")
 require("plugins.which-key")
+require("plugins.spectre")
 
 -- Code plugins
 require("plugins.comments")

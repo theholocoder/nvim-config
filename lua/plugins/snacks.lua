@@ -9,7 +9,8 @@ snacks.setup({
     enabled = true,
     sections = {
       { section = "header" },
-      { section = "recent_files", cwd = true, limit = 8, padding = 1 },
+      { section = "recent_files", cwd = true, limit = 8,  padding = 1 },
+      { section = "keys",         gap = 1,    padding = 1 },
       {
         section = "terminal",
         cmd = "pokemon-colorscripts -r 1 --no-title; sleep .1",
@@ -17,6 +18,27 @@ snacks.setup({
         pane = 2,
         indent = 4,
         height = 30,
+      },
+    },
+    preset = {
+      keys = {
+        { icon = " ", key = "f", desc = "Find File", action = ":lua require('telescope.builtin').find_files()" },
+        { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+        { icon = " ", key = "g", desc = "Find Text", action = ":lua require('telescope.builtin').live_grep()" },
+        {
+          icon = " ",
+          key = "s",
+          desc = "Restore Session",
+          action = function()
+            local sessions = require("mini.sessions")
+            local latest = sessions.get_latest()
+            print(latest)
+            if latest ~= nil then
+              sessions.read(latest)
+            end
+          end
+        },
+        { icon = " ", key = "q", desc = "Quit", action = ":qa" },
       },
     },
   },

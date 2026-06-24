@@ -38,6 +38,11 @@ vim.api.nvim_create_user_command("PackUpdate", function(opts)
   vim.pack.del(opts.fargs)
 end, { nargs = "*", desc = "Delete plugins (:PackUpdate [plugin]..." })
 
+-- Old habits die hard
+vim.api.nvim_create_user_command("LspInfo", function(_)
+  vim.cmd(":checkhealth vim.lsp")
+end, { desc = "Check LSP health" })
+
 -- Copy buffer filepath
 vim.api.nvim_create_user_command("CopyPath", function(context)
   local full_path = vim.fn.glob("%:p")

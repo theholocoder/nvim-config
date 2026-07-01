@@ -23,6 +23,7 @@ require("plugins.harpoon")
 require("plugins.terminal")
 require("plugins.which-key")
 require("plugins.spectre")
+-- require("plugins.glab-todo") -- enable only if needed
 
 -- Code plugins
 require("plugins.comments")
